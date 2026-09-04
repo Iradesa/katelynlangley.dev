@@ -1,28 +1,33 @@
-# Astro site template
+# katelynlangley.dev
 
-Create a repository from this template, open it in the devcontainer, and run:
+Katelyn Langley’s personal portfolio, built with Astro and Tailwind CSS.
+
+The canonical root experience is a full-browser Desktop Garden workspace: a large About window spans two rows beside authentic Tavern Playhouse and Cody’s Crayons project windows, then becomes a single-column stack on mobile. Katelyn’s toolbox stays inside About, and direct email is the primary action.
+
+The site ships matching SVG and PNG Desktop Garden favicons. There are no prototype routes or prototype switcher.
+
+## Development
 
 ```sh
-./init.sh
+pnpm install
+pnpm dev
 ```
 
-The initializer derives the site name from the Git origin, prepares the package
-metadata and starter README, removes the default Astro favicon, and commits the
-initialized scaffold. Rebuild the devcontainer afterward.
+The local site is available at `http://localhost:4321`.
 
-## Design workflow
+## Production build
 
-1. Fill in `concept.md` with a description of the product or concept.
-2. Prompt your AI agent: "Use the design-prototyping skill and create N prototypes."
-3. Work with the agent to create and refine prototypes until the design is finalized.
+```sh
+pnpm build
+pnpm preview
+```
 
-## Deployment configuration
+Astro writes the static site to `dist/`.
 
-Set the `DEPLOY_TARGET` repository variable to `cf_pages` or `gh_pages`. Leaving
-it unset skips deployment.
+## Deployment
 
-Cloudflare Pages deployments require these repository secrets:
+The deployment workflow reads the `DEPLOY_TARGET` GitHub repository variable:
 
-- `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_PROJECT_ID`
-- `CLOUDFLARE_PAGES_API_TOKEN`
+- `cf_pages` deploys to Cloudflare Pages and requires `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PROJECT_ID`, and `CLOUDFLARE_PAGES_API_TOKEN` secrets.
+- `gh_pages` deploys to GitHub Pages.
+- An unset value skips deployment.

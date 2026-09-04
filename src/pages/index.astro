@@ -1,15 +1,27 @@
 ---
-
+import SiteLayout from '../layouts/SiteLayout.astro';
+const mail='mailto:katie@wyrd.team';
+const projects=[
+  {name:'Tavern Playhouse',file:'tavern-playhouse.app',note:'With Tavern Playhouse, I took foundational skills and an AI-assisted workflow all the way to a deployed application. Building it meant working through unfamiliar territory and turning each solved problem into the next working piece.',image:'/projects/tavern-playhouse.png',alt:'Tavern Playhouse Performance Screen staging three actors in a library scene',width:1784,height:882,url:'https://playhouse.thetavern.app',action:'Explore Tavern Playhouse'},
+  {name:"Cody’s Crayons",file:'codys-crayons.game',note:'Six of us built this Unity horror-puzzle game at California State University of San Bernardino. We filled an abandoned school with eight crayons, one persistent coyote, and plenty of reasons to keep your flashlight close.',image:'/projects/codys-crayons.png',alt:"Cody’s Crayons gameplay inside a dark school computer lab",width:1322,height:1190,url:'https://iradesa.itch.io/codys-crayons',action:"Play Cody's Crayons"},
+  {name:'Marion',file:'marion.game',note:'I worked as the General Artist on this eight-person Software Engineering project. Marion is a 2D top-down dungeon crawler about a marionette trying to escape an evil rat plague doctor.',image:'/projects/marion.png',alt:'Main artwork for Marion showing a marionette suspended under a spotlight',width:1920,height:1080,secondaryImage:'/projects/marion-gameplay.png',secondaryAlt:'Marion gameplay showing the player facing an enemy inside a wooden dungeon room',secondaryWidth:1676,secondaryHeight:938,url:'https://github.com/BatesThaBeast/The-Labyrinth-Studios/tree/Main',action:'Play Marion'}
+];
+const tools=['Adobe Photoshop','AI agents','C++','CSS','Docker','Figma','GitHub','Go','HTML','Java','JavaScript','Python','Unity 5','Unreal Engine'];
+const education='My path started with a B.S. in Computer Systems, focused on Game Development, from California State University of San Bernardino. I followed it with Google’s UX/UI Design Certificate, and I’m still adding new languages and software skills through Boot.dev.';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>&lt;site name&gt;</title>
-	</head>
-	<body>
-		<h1>&lt;site name&gt;</h1>
-	</body>
-</html>
+<SiteLayout>
+  <main class="min-h-screen bg-[#cbb8e8]">
+    <header class="flex min-h-12 items-center justify-between gap-3 bg-[#704da0] px-4 text-xs text-white sm:px-6">
+      <span class="flex gap-2" aria-hidden="true"><i class="size-3 rounded-full bg-[#ff8b78]"></i><i class="size-3 rounded-full bg-[#ffe16d]"></i><i class="size-3 rounded-full bg-[#aaff7a]"></i></span>
+      <span>katelynlangley.dev</span><span>STILL LEARNING <b class="blink">●</b></span>
+    </header>
+    <div class="grid min-h-[calc(100vh-3rem)] gap-4 p-4 lg:grid-cols-[1.1fr_.9fr] lg:items-start lg:p-6">
+      <section class="window flex flex-col bg-[#09170e] lg:sticky lg:top-6 lg:min-h-[calc(100vh-6rem)]"><div class="bar">about-katelyn-langley.txt</div><div class="flex flex-1 flex-col justify-between p-7 sm:p-10 lg:p-14"><div><h1 class="max-w-3xl font-grotesk text-[clamp(3.6rem,7vw,6rem)] font-bold leading-[.86] tracking-[-.04em] text-white">Hello! ･°˖✧◝(⁰▿⁰)◜✧˖°.</h1><p class="mt-8 max-w-2xl text-base leading-7 text-[#a8c2aa]">My name is Katelyn Langley, and I'm a Junior Software Developer currently searching for full-time work while I do personal projects on the side. Most of what I know has come from making: trying an idea, getting stuck, finding a way through, and carrying that lesson into whatever I build next. Feel free to check out the projects showcased here and continue to follow this site as I continue to make and publish more projects in the future. Also consider reaching out to me using the button below to discuss anything about my work and future as a developer!</p><p class="mt-5 max-w-2xl text-xs leading-6 text-[#78907c]">{education}</p><a href={mail} class="mt-8 inline-block bg-[#baff70] px-5 py-3 font-bold text-[#102417] transition hover:bg-white">Come say hello (ᵔᵕᵔ)ﾉ →</a></div><div class="mt-12"><p class="mb-4 text-xs text-[#78907c]">WHAT I’M BUILDING WITH LATELY</p><div class="flex flex-wrap gap-2">{tools.map(t=><span class="rounded-md border border-[#52705a] px-3 py-2 text-xs">{t}</span>)}</div></div></div></section>
+      <section class="grid gap-4" aria-label="Featured projects">{projects.map(p=><article class="window grid bg-[#d4e8dc] text-[#102417]"><div class="bar flex items-center justify-between gap-4"><span>{p.file}</span><span class="text-[#baff70]">PROJECT OPEN</span></div>{p.secondaryImage ? <div class="grid bg-[#050b18] sm:grid-cols-2"><img src={p.image} alt={p.alt} width={p.width} height={p.height} class="aspect-video h-full w-full object-cover object-top"/><img src={p.secondaryImage} alt={p.secondaryAlt} width={p.secondaryWidth} height={p.secondaryHeight} class="aspect-video h-full w-full object-cover object-top"/></div> : <img src={p.image} alt={p.alt} width={p.width} height={p.height} class="aspect-[2/1] w-full bg-[#050b18] object-cover object-top"/>}<div class="p-5"><h2 class="font-grotesk text-3xl font-bold">{p.name}</h2><p class="mt-2 text-xs leading-5">{p.note}</p><a href={p.url} target="_blank" rel="noreferrer" class="mt-4 inline-block font-bold text-[#65438f] underline underline-offset-4">{p.action} →</a></div></article>)}</section>
+    </div>
+  </main>
+</SiteLayout>
+<style>
+  .window{overflow:hidden;border-radius:14px;box-shadow:0 20px 50px rgba(9,23,14,.24)}
+  .bar{min-height:2.25rem;background:#704da0;color:white;padding:.65rem 1rem;font-size:.75rem;letter-spacing:.03em}
+</style>
