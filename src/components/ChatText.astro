@@ -1,0 +1,10 @@
+---
+interface Props { room: string; }
+const { room } = Astro.props;
+---
+<div class="chat-transcript">
+  <div class="chat-room" aria-hidden="true"><span>#{room}</span><span>message history</span></div>
+  <div class="chat-message">
+    <div class="chat-copy"><slot /></div>
+  </div>
+</div>

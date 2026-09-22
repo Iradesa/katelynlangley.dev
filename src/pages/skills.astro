@@ -1,0 +1,14 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import Tabs from '../components/Tabs.astro';
+import Placeholder from '../components/Placeholder.astro';
+import WindowTitle from '../components/WindowTitle.astro';
+import { skills } from '../data/portfolio';
+---
+<Desktop page="Skills" description="Explore the tools and development skills Katelyn Langley is learning and using.">
+<header class="workspace-heading"><p class="eyebrow">WHAT I’M BUILDING WITH</p><h1>Skills</h1><p>Select a skill to explore its overview and examples.</p></header>
+<Tabs name="Skills" labels={skills}>{skills.map((skill, i) => <div class="open-windows" id={`panel-${i}`} data-panel>
+<section class="window dark-window"><WindowTitle title="skill-overview.txt" /><div class="window-body"><p class="eyebrow">MY TOOLKIT / {String(i + 1).padStart(2, '0')}</p><h2>{skill}</h2><div class="skill-description"><Placeholder title="What this skill means to me" prompt={`Add a description of ${skill}, what I know, and what I’m learning.`} /></div></div><div class="window-status">{skill} · Overview</div></section>
+<section class="window light-window supporting-window"><WindowTitle title="skill-in-practice.txt" /><div class="window-body"><p class="eyebrow">{skill}</p><h2>In practice</h2><div class="skill-description"><Placeholder title="How I’ve demonstrated it" prompt="Add specific examples of using this skill, with links to projects or work where relevant." /></div></div><div class="window-status">Examples &amp; work samples</div></section>
+</div>)}</Tabs>
+</Desktop>

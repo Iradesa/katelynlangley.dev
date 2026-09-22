@@ -1,0 +1,14 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import ChatText from '../components/ChatText.astro';
+import Placeholder from '../components/Placeholder.astro';
+import WindowTitle from '../components/WindowTitle.astro';
+---
+<Desktop page="Current work" description="Katelyn Langley’s current work as a substitute teacher and its connection to software development.">
+<div class="open-windows">
+<section class="window dark-window"><WindowTitle title="current-work.txt" /><div class="window-body"><p class="eyebrow">WHAT I DO NOW</p><h1>Substitute<br />teaching</h1><ChatText room="current-work"><p class="prose">I currently work as a substitute teacher.</p></ChatText><div class="skill-description"><Placeholder title="My current role" prompt="Describe my current employment, how I came to this work, and what a typical teaching day looks like." /></div></div><div class="window-status">Current profession · Substitute teacher</div></section>
+<div class="window-stack">
+<section class="window light-window"><WindowTitle title="classroom-notes.txt" /><div class="window-body"><Placeholder title="Age groups" prompt="Add the ages or grade levels I teach and how I adapt to different groups." /><div class="skill-description"><Placeholder title="Responsibilities" prompt="Describe my day-to-day responsibilities and what I’m trusted to manage in the classroom." /></div></div></section>
+<section class="window light-window"><WindowTitle title="transferable-skills.txt" /><div class="window-body"><Placeholder title="From teaching to development" prompt="Share specific examples of skills I’ve demonstrated while teaching and how I can apply them to software development." /></div></section>
+</div></div>
+</Desktop>

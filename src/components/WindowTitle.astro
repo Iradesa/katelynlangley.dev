@@ -1,0 +1,5 @@
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<div class="bar window-title"><span class="window-caption"><span class="window-symbol" aria-hidden="true">▧</span>{title}</span><span class="window-controls" aria-hidden="true"><i></i><i></i><i></i></span></div>

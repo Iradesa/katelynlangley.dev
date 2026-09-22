@@ -1,0 +1,17 @@
+---
+import SiteLayout from './SiteLayout.astro';
+interface Props { page: string; description: string; }
+const { page, description } = Astro.props;
+const pages = [['Home', '/'], ['Bio', '/bio/'], ['Projects', '/projects/'], ['Skills', '/skills/'], ['Current work', '/current-work/']];
+---
+<SiteLayout title={`${page} · Katelyn Langley`} description={description}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="desktop-header"><a class="site-name" href="/">katelynlangley.dev</a><span class="status">STILL LEARNING <b class="blink">●</b></span></header>
+  <div class="desktop-shell">
+  <nav class="desktop-nav" aria-label="Main navigation">{pages.map(([label, href]) => <a href={href} aria-current={page === label ? 'page' : undefined}><span class="page-app-icon" aria-hidden="true">{['⌂', '☺', '▧', '⌘', '▣'][pages.findIndex(p => p[0] === label)]}</span><span>{label}</span></a>)}</nav>
+  <div class="desktop-content">
+  <main id="main" class="desktop"><slot /></main>
+  <footer class="desktop-footer">Katelyn Langley <span>Making things. Learning along the way.</span></footer>
+  </div>
+  </div>
+</SiteLayout>

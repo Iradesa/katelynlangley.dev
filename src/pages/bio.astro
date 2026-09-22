@@ -1,0 +1,19 @@
+---
+import Desktop from '../layouts/Desktop.astro';
+import ContactIcon from '../components/ContactIcon.astro';
+import WindowTitle from '../components/WindowTitle.astro';
+import ChatText from '../components/ChatText.astro';
+const education='My path started with a B.S. in Computer Systems, focused on Game Development, from California State University of San Bernardino. I followed it with Google’s UX/UI Design Certificate, and I’m still adding new languages and software skills through Boot.dev.';
+---
+<Desktop page="Bio" description="About Katelyn Langley, junior software developer, and ways to get in touch.">
+<div class="open-windows bio-workspace">
+<section class="window dark-window"><WindowTitle title="about-katelyn-langley.txt" /><div class="window-body">
+<p class="eyebrow">A LITTLE ABOUT ME</p><h1>Hello! <span class="greeting">(ᵔᵕᵔ)ﾉ</span></h1>
+<ChatText room="about-me"><p class="prose">My name is Katelyn Langley, and I'm a Junior Software Developer currently searching for full-time work while I do personal projects on the side. Most of what I know has come from making: trying an idea, getting stuck, finding a way through, and carrying that lesson into whatever I build next. Feel free to check out the projects showcased here and continue to follow this site as I continue to make and publish more projects in the future. Also consider reaching out to me using the button below to discuss anything about my work and future as a developer!</p><p class="prose">{education}</p></ChatText>
+</div></section>
+<section class="window light-window"><WindowTitle title="contact.messenger" /><div class="window-body">
+<p class="eyebrow">LET’S CONNECT</p><h2>Come say hello.</h2><ChatText room="say-hello"><p class="prose">Get in touch about my work and future as a developer, or explore what I’m making.</p></ChatText>
+<div class="contact-list"><a href="mailto:me@katelynlangley.dev"><span class="contact-method"><ContactIcon name="email" />Email</span><strong>me@katelynlangley.dev ↗</strong></a><a href="https://github.com/Iradesa"><span class="contact-method"><ContactIcon name="github" />GitHub · Iradesa</span><strong>Explore my code ↗</strong></a><a href="https://iradesa.itch.io"><span class="contact-method"><ContactIcon name="itchdotio" />itch.io · iradesa</span><strong>Explore my games ↗</strong></a></div>
+</div></section>
+</div>
+</Desktop>

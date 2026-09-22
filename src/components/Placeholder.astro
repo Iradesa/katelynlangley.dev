@@ -1,0 +1,5 @@
+---
+interface Props { title: string; prompt: string; }
+const { title, prompt } = Astro.props;
+---
+<div class="placeholder chat-draft"><div class="chat-draft-header"><span aria-hidden="true">[ draft message ]</span><p class="placeholder-label">TO BE ADDED</p></div><h3>{title}</h3><p>{prompt}</p></div>

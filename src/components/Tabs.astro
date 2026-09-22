@@ -1,0 +1,37 @@
+---
+interface Props { labels: string[]; name: string; }
+const { labels, name } = Astro.props;
+---
+<div class="tabs" data-tabs>
+  <div class="tab-list" aria-label={name}>
+    {labels.map((label, i) => <a id={`tab-${i}`} href={`#panel-${i}`} data-tab>{label}</a>)}
+  </div>
+  <div class="tab-content"><slot /></div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach(root => {
+    const list = root.querySelector<HTMLElement>('.tab-list')!;
+    const tabs = Array.from(root.querySelectorAll<HTMLAnchorElement>('[data-tab]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'));
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-orientation', 'horizontal');
+    function select(index: number) {
+      tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; panels[i].hidden = i !== index; });
+    }
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('role', 'tab'); tab.setAttribute('aria-controls', panels[i].id);
+      panels[i].setAttribute('role', 'tabpanel'); panels[i].setAttribute('aria-labelledby', tab.id); panels[i].tabIndex = 0;
+      tab.addEventListener('click', e => { e.preventDefault(); select(i); });
+      tab.addEventListener('keydown', e => {
+        let next = i;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        else return;
+        e.preventDefault(); select(next); tabs[next].focus();
+      });
+    });
+    select(0);
+  });
+</script>
