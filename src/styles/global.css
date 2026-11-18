@@ -145,7 +145,7 @@ body { margin: 0; }
 .desktop-nav a[aria-current=page] .page-app-icon { background: #704da0; color: #baff70; }
 .bio-workspace { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 .home-workspace { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 1.75rem; }
-.home-workspace .welcome { width: 100%; max-width: 850px; justify-self: center; }
+.home-workspace .welcome { width: 100%; max-width: 1100px; justify-self: center; }
 .home-workspace .section-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; }
 .home-workspace .section-link { display: flex; flex-direction: column; }
 .home-workspace .section-link .window-body { display: flex; flex: 1; flex-direction: column; }
@@ -154,7 +154,8 @@ body { margin: 0; }
 .home-workspace .section-link h2 { font-size: 1.8rem; }
 .home-workspace .section-link .eyebrow { display: none; }
 .home-workspace .welcome h1 { font-size: clamp(3rem, 5vw, 5.5rem); }
-.home-workspace .welcome .window-body { padding: 2rem; }
+.home-workspace .welcome .window-body { min-height: clamp(28rem, 60vh, 42rem); padding: clamp(2rem, 5vw, 4rem); }
+.home-wave { margin-top: 1rem; padding-block: 1rem; text-align: center; font-size: clamp(2rem, 4vw, 3rem); color: #49365e; white-space: nowrap; }
 .section-link:hover { transform: none; box-shadow: 0 20px 40px #09170e40; }
 @media (max-width: 1050px) {
   .open-windows, .bio-workspace, .home-workspace { grid-template-columns: minmax(0, 1fr); }
