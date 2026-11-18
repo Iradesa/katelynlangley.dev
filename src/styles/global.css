@@ -358,3 +358,13 @@ body { margin: 0; }
 }
 
 @font-face { font-family: "Patrick Hand"; src: url("/fonts/patrick-hand.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+
+/* Native CSS cursors keep the pixel artwork aligned with the mouse hotspot. */
+@media (any-pointer: fine) {
+  html { cursor: url("/cursors/pixel-arrow.svg") 2 1, default; }
+  a[href], button:not(:disabled), [role="button"], summary {
+    cursor: url("/cursors/pixel-hand.svg") 12 2, pointer;
+  }
+  input, textarea, [contenteditable="true"] { cursor: text; }
+  button:disabled { cursor: not-allowed; }
+}
