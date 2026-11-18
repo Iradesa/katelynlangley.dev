@@ -1,0 +1,8 @@
+---
+import { skillIconPaths } from '../data/skill-icons';
+interface Props { skill: string; }
+const { skill } = Astro.props;
+---
+<svg class="skill-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+  {skill === 'AI agents' ? <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="13" rx="4" /><path d="M12 3v4M2 12v4m20-4v4M9 16h6" /><circle cx="12" cy="2.5" r="1" fill="currentColor" /><circle cx="9" cy="12" r="1" fill="currentColor" /><circle cx="15" cy="12" r="1" fill="currentColor" /></g> : <path fill="currentColor" d={skillIconPaths[skill]} />}
+</svg>

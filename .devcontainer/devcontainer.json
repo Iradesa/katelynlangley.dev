@@ -8,30 +8,25 @@
     }
   },
   "mounts": [
-    {
-      "source": "claude",
-      "target": "/home/vscode/.claude",
-      "type": "volume"
-    },
-    {
-      "source": "codex",
+        {
+      "source": "${localEnv:HOME}/dev-config/codex",
       "target": "/home/vscode/.codex",
-      "type": "volume"
+      "type": "bind"
     },
     {
-      "source": "gemini",
-      "target": "/home/vscode/.gemini",
-      "type": "volume"
+      "source": "${localEnv:HOME}/dev-config/agent-browser",
+      "target": "/home/vscode/.agent-browser",
+      "type": "bind"
     },
     {
-      "source": "gemini-auth",
-      "target": "/home/vscode/.cache/google-vscode-extension",
-      "type": "volume"
-    },
-    {
-      "source": "agents",
+      "source": "${localEnv:HOME}/dev-config/agents",
       "target": "/home/vscode/.agents",
-      "type": "volume"
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:HOME}/dev-config/mnemonic",
+      "target": "/home/vscode/.mnemonic",
+      "type": "bind"
     }
   ],
   "customizations": {
@@ -56,11 +51,7 @@
         "GitHub.vscode-pull-request-github",
 
         // AI assistants
-        "anthropic.claude-code",
-        "google.geminicodeassist",
-        "google.gemini-cli-vscode-ide-companion",
-        "openai.chatgpt",
-        "kilocode.Kilo-Code"
+        "openai.chatgpt"
       ],
       "settings": {}
     }
@@ -79,8 +70,6 @@
   "postCreateCommand": {
     "own-cache": "mkdir -p /home/vscode/.cache && sudo chown -R vscode:vscode /home/vscode/.cache",
     "task": "npm install -g @go-task/cli",
-    "claude-code": "curl -fsSL https://claude.ai/install.sh | bash",
-    "gemini": "npm install -g @google/gemini-cli",
     "codex": "npm i -g @openai/codex",
     "skills": "npx -y skills list"
   }

@@ -1,14 +1,59 @@
 ---
 import Desktop from '../layouts/Desktop.astro';
-import Tabs from '../components/Tabs.astro';
+import SkillIcon from '../components/SkillIcon.astro';
 import Placeholder from '../components/Placeholder.astro';
 import WindowTitle from '../components/WindowTitle.astro';
 import { skills } from '../data/portfolio';
 ---
 <Desktop page="Skills" description="Explore the tools and development skills Katelyn Langley is learning and using.">
-<header class="workspace-heading"><p class="eyebrow">WHAT I’M BUILDING WITH</p><h1>Skills</h1><p>Select a skill to explore its overview and examples.</p></header>
-<Tabs name="Skills" labels={skills}>{skills.map((skill, i) => <div class="open-windows" id={`panel-${i}`} data-panel>
-<section class="window dark-window"><WindowTitle title="skill-overview.txt" /><div class="window-body"><p class="eyebrow">MY TOOLKIT / {String(i + 1).padStart(2, '0')}</p><h2>{skill}</h2><div class="skill-description"><Placeholder title="What this skill means to me" prompt={`Add a description of ${skill}, what I know, and what I’m learning.`} /></div></div><div class="window-status">{skill} · Overview</div></section>
-<section class="window light-window supporting-window"><WindowTitle title="skill-in-practice.txt" /><div class="window-body"><p class="eyebrow">{skill}</p><h2>In practice</h2><div class="skill-description"><Placeholder title="How I’ve demonstrated it" prompt="Add specific examples of using this skill, with links to projects or work where relevant." /></div></div><div class="window-status">Examples &amp; work samples</div></section>
-</div>)}</Tabs>
+<header class="workspace-heading"><h1>Skills</h1></header>
+<section class="window light-window skill-gallery" data-gallery aria-label="Skills gallery">
+<WindowTitle title="skills.gallery — Photo Viewer" />
+<div class="gallery-toolbar"><span>My toolkit</span><span data-counter aria-live="polite" aria-atomic="true">1 / {skills.length} · {skills[0]}</span><div class="gallery-controls" hidden><button type="button" data-prev aria-label="Previous skill">←</button><button type="button" data-next aria-label="Next skill">→</button></div></div>
+<div class="gallery-stage">{skills.map((skill, i) => <article class="skill-slide" id={`skill-${i}`} data-slide>
+<div class="skill-art" aria-hidden="true"><span class="skill-frame-number">{String(i + 1).padStart(2, '0')} / MY TOOLKIT</span><span class="skill-mark"><SkillIcon skill={skill} /></span><span class="skill-art-label">{skill}</span></div>
+<div class="skill-caption"><p class="eyebrow">SKILL {String(i + 1).padStart(2, '0')}</p><h2>{skill}</h2><div class="skill-blurbs"><Placeholder title="What it is" prompt={`Add a short description of ${skill} and what I use it for.`} /><Placeholder title="How I’ve learned and used it" prompt="Add how I learned this skill and a specific example of demonstrating it in my work." /></div></div>
+</article>)}</div>
+<div class="gallery-filmstrip" aria-label="Choose a skill">{skills.map((skill, i) => <a href={`#skill-${i}`} class="skill-thumbnail" id={`skill-thumb-${i}`} data-thumb><span class="thumbnail-art" aria-hidden="true"><SkillIcon skill={skill} /></span><span>{skill}</span></a>)}</div>
+<div class="window-status">{skills.length} skills · Select a thumbnail to explore</div>
+</section>
 </Desktop>
+<script>
+const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+if (gallery) {
+  const slides = Array.from(gallery.querySelectorAll<HTMLElement>('[data-slide]'));
+  const thumbs = Array.from(gallery.querySelectorAll<HTMLAnchorElement>('[data-thumb]'));
+  const strip = gallery.querySelector<HTMLElement>('.gallery-filmstrip')!;
+  const controls = gallery.querySelector<HTMLElement>('.gallery-controls')!;
+  let current = 0;
+  strip.setAttribute('role', 'tablist');
+  thumbs.forEach((thumb, i) => {
+    thumb.setAttribute('role', 'tab'); thumb.setAttribute('aria-controls', slides[i].id);
+    slides[i].setAttribute('role', 'tabpanel'); slides[i].setAttribute('aria-labelledby', thumb.id); slides[i].tabIndex = 0;
+    thumb.addEventListener('click', event => { event.preventDefault(); select(i, true); });
+    thumb.addEventListener('keydown', event => {
+      let index = i;
+      if (event.key === 'ArrowRight') index++;
+      else if (event.key === 'ArrowLeft') index--;
+      else if (event.key === 'Home') index = 0;
+      else if (event.key === 'End') index = slides.length - 1;
+      else return;
+      event.preventDefault(); select(index, true); thumbs[current].focus({ preventScroll: true });
+    });
+  });
+  function select(index: number, reveal = false) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => { slide.hidden = i !== current; thumbs[i].setAttribute('aria-selected', String(i === current)); thumbs[i].tabIndex = i === current ? 0 : -1; });
+    gallery!.querySelector('[data-counter]')!.textContent = `${current + 1} / ${slides.length} · ${slides[current].querySelector('h2')!.textContent}`;
+    if (reveal) {
+      const thumb = thumbs[current].getBoundingClientRect(); const bounds = strip.getBoundingClientRect();
+      if (thumb.left < bounds.left) strip.scrollLeft -= bounds.left - thumb.left + 12;
+      else if (thumb.right > bounds.right) strip.scrollLeft += thumb.right - bounds.right + 12;
+    }
+  }
+  gallery.querySelector('[data-prev]')!.addEventListener('click', () => select(current - 1, true));
+  gallery.querySelector('[data-next]')!.addEventListener('click', () => select(current + 1, true));
+  controls.hidden = false;
+  select(0);
+}
+</script>

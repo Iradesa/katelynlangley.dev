@@ -1,10 +1,14 @@
 ---
-interface Props { labels: string[]; name: string; }
-const { labels, name } = Astro.props;
+import WindowTitle from './WindowTitle.astro';
+interface Props { labels: string[]; name: string; folder?: boolean; }
+const { labels, name, folder = false } = Astro.props;
 ---
-<div class="tabs" data-tabs>
+<div class:list={["tabs", { "folder-tabs": folder }]} data-tabs>
+  <div class:list={[folder ? "folder-window window light-window" : "tab-selector"]}>
+  {folder && <><WindowTitle title="Projects — File Explorer" /><div class="folder-address"><span aria-hidden="true">▱</span><span>Desktop <span aria-hidden="true">/</span> <strong>Projects</strong></span></div><div class="folder-info"><span>{labels.length} projects</span><span>Select a folder to open</span></div></>}
   <div class="tab-list" aria-label={name}>
-    {labels.map((label, i) => <a id={`tab-${i}`} href={`#panel-${i}`} data-tab>{label}</a>)}
+    {labels.map((label, i) => <a id={`tab-${i}`} href={`#panel-${i}`} data-tab>{folder && <span class="project-folder-icon" aria-hidden="true"><span></span></span>}<span>{label}</span></a>)}
+  </div>
   </div>
   <div class="tab-content"><slot /></div>
 </div>
