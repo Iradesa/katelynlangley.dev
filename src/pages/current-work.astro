@@ -4,7 +4,10 @@ import WindowTitle from '../components/WindowTitle.astro';
 const palette = ['#09170e', '#ffffff', '#704da0', '#cbb8e8', '#52705a', '#baff70', '#a8c2aa', '#ffe16d', '#ff8b78', '#a95070', '#559ab0', '#bce4f0'];
 const tools = ['M4 4h16v16H4z', 'm4 17 12-12 3 3L7 20H4zm10-10 3 3', 'm5 15 8-10 7 6-8 10H9zM9 21h12', 'M14 4 4 14l6 6L20 10zM4 14h12M20 15s-4 4-1 6 4-2 1-6', 'M5 5h14M12 5v15M8 20h8', 'M5 19 19 5', 'M4 7h16v11H4z', 'M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16', 'M4 19c3-16 7 8 16-14', 'M12 3 15 9 21 10 16.5 14.5 17.5 21 12 18 6.5 21 7.5 14.5 3 10 9 9Z'];
 const notes = [
-  {title: 'My current role', prompt: 'Describe my current employment, how I came to this work, and what a typical teaching day looks like.'},
+  {title: 'My current role', paragraphs: [
+    "I work under my local School District as a Substitute Teacher, mostly working for former teachers of my own that need a sub every now and then. I was formerly a tutor under the same district, so after graduating from university, I applied to become a Substitute Teacher as a way to both make an income and be able to continue my career in software development on the side.",
+    "For me, a typical day is set up by the teacher I am a substitute for, mostly watching over students as they do individual work. Some days I run tests and other exams for the teachers, and have even done some labs for science classes when necessary. I keep the students on track for their teachers while they're away, so that when they come back it hopefully feels like no time was lost for the class.",
+  ]},
   {title: 'Age groups', prompt: 'Add the ages or grade levels I teach and how I adapt to different groups.'},
   {title: 'Responsibilities', prompt: 'Describe my day-to-day responsibilities and what I’m trusted to manage in the classroom.'},
   {title: 'From teaching to development', prompt: 'Share specific examples of skills I’ve demonstrated while teaching and how I can apply them to software development.'},
@@ -18,7 +21,7 @@ const notes = [
 <aside class="paint-tools" aria-hidden="true">{tools.map((path, i) => <span class:list={["paint-tool", { "paint-tool-selected": i === 1 }]}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={path} /></svg></span>)}<div class="paint-brushes"><i></i><i></i><i></i></div></aside>
 <div class="paint-canvas-surround"><div class="paint-canvas">
 <header class="paint-intro"><h1>Substitute Teaching</h1><svg class="paint-underline" viewBox="0 0 460 18" aria-hidden="true"><path d="M4 10Q90 2 190 9T455 7M10 15Q180 6 390 13" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" /></svg><p>I currently work as a substitute teacher.</p></header>
-<div class="paint-notes">{notes.map((note, i) => <section class:list={["paint-note", `paint-note-${i}`]}><div><p class="paint-placeholder-label">TO BE ADDED</p><h2>{note.title}</h2><p>{note.prompt}</p></div></section>)}</div>
+<div class="paint-notes">{notes.map((note, i) => <section class:list={["paint-note", `paint-note-${i}`]}><div>{note.prompt && <p class="paint-placeholder-label">TO BE ADDED</p>}<h2>{note.title}</h2>{note.paragraphs ? note.paragraphs.map(paragraph => <p>{paragraph}</p>) : <p>{note.prompt}</p>}</div></section>)}</div>
 </div></div>
 </div>
 <div class="paint-palette" aria-hidden="true"><span class="paint-current-color"><i></i><i></i></span><div>{palette.map(color => <span style={`background:${color}`}></span>)}</div><span class="paint-color-caption">A little color goes a long way.</span></div>
