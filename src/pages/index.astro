@@ -2,26 +2,10 @@
 import Desktop from '../layouts/Desktop.astro';
 import WindowTitle from '../components/WindowTitle.astro';
 import ChatText from '../components/ChatText.astro';
-const sections = [
-  { title: 'Bio', file: 'about-katelyn.txt', href: '/bio/', description: 'A little about me, my background, and where to find me.' },
-  { title: 'Projects', file: 'projects.folder', href: '/projects/', description: 'Games, software, and the stories behind what I’ve made.' },
-  { title: 'Skills', file: 'skills.folder', href: '/skills/', description: 'The tools and skills I’m building with and learning along the way.' },
-  { title: 'Current work', file: 'current-work.txt', href: '/current-work/', description: 'Substitute teaching and the experience I bring into software development.' },
-];
 ---
 <Desktop page="Home" description="Meet Katelyn Langley. Explore my bio, software and game projects, skills, and current work.">
 <div class="home-workspace">
-<section class="window dark-window welcome"><WindowTitle title="welcome.txt" /><div class="window-body"><p class="eyebrow">JUNIOR SOFTWARE DEVELOPER</p><h1>Katelyn<br />Langley<span class="cursor" aria-hidden="true">_</span></h1><ChatText room="welcome"><p class="prose">Making software, creating games, and always learning something new.</p></ChatText><p class="welcome-note">Welcome to my little corner of the internet.<br />Open a section below to take a look around. ↓</p></div></section>
-<section class="window light-window home-inbox" aria-labelledby="inbox-heading">
-<WindowTitle title="inbox.mail — Katelyn Langley" />
-<div class="inbox-toolbar"><div><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m3 6 9 7 9-7" /></svg><h2 id="inbox-heading">Inbox</h2><span class="inbox-count">4</span></div><p>Four messages. A little about me.</p></div>
-<div class="inbox-columns" aria-hidden="true"><span>From</span><span>Subject / Preview</span></div>
-<nav class="inbox-messages" aria-label="Explore the site">{sections.map(section => <a class="inbox-message" href={section.href}>
-<span class="inbox-sender"><span class="inbox-avatar" aria-hidden="true">K</span><span>Katelyn Langley</span></span>
-<span class="inbox-content"><span class="inbox-subject">{section.title}</span><span class="inbox-preview">{section.description}</span></span>
-<span class="inbox-open" aria-hidden="true">↗</span>
-</a>)}</nav>
-<div class="window-status inbox-status"><span>4 messages</span><span>Open a message to explore a chapter</span></div>
-</section>
+<section class="window dark-window welcome"><WindowTitle title="welcome.txt" /><div class="window-body"><p class="eyebrow">JUNIOR SOFTWARE DEVELOPER</p><h1>Katelyn<br />Langley<span class="cursor" aria-hidden="true">_</span></h1><ChatText room="welcome"><p class="prose">Making software, creating games, and always learning something new.</p></ChatText><p class="welcome-note">Welcome to my little corner of the internet.<br />Choose a section from the navigation to take a look around.</p></div></section>
+
 </div>
 </Desktop>
